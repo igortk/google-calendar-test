@@ -7,5 +7,5 @@ test('authenticate', async ({page})=>{
 
     await expect(page.getByLabel(/Create|Створити/i)).toBeVisible({timeout: 60_000});
 
-    await page.context().storageState();
+    await page.context().storageState({path: authFile});
 })

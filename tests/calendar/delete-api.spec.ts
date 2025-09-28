@@ -28,6 +28,6 @@ test.describe("Calendar CRUD functionality, Delete: ", () => {
 
     await expect(
       calendarPage.eventTitleOnCalendar(eventTitle)
-    ).not.toBeVisible({ timeout: 30_000 });
+    ).not.toBeVisible({ timeout: 10_000 });
   });
 });
