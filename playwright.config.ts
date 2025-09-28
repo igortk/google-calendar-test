@@ -1,29 +1,18 @@
 import { defineConfig, devices } from "@playwright/test";
 
-/**
- * Read environment variables from file--.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
-
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
 export default defineConfig({
-  testDir: "./tests",
-  fullyParallel: true,
+  testDir: "./tests", // base directory with test
+  fullyParallel: true, // run test in parallel or not
+  workers: 4, // the number of tests that will be run in parallel
   projects: [
     {
       name: "setup",
-      testMatch: /.*\.setup\.ts/,
+      testMatch: /.*\.setup\.ts/, // the path where the necessary files for this project are located
       use: {
         ...devices["Desktop Chrome"],
         baseURL: "https://calendar.google.com/",
-        storageState: "google-auth.json",
         launchOptions: {
-          headless: false,
+          headless: false, // Setting whether the browser window will appear on the computer or not
           args: ["--disable-blink-features=AutomationControlled"],
         },
       },
@@ -40,7 +29,7 @@ export default defineConfig({
           args: ["--disable-blink-features=AutomationControlled"],
         },
       },
-      dependencies: ['setup'],
+      dependencies: ["setup"],
     },
     // {
     //   name: 'firefox',
@@ -72,11 +61,4 @@ export default defineConfig({
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
   ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });
